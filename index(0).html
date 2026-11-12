@@ -1,0 +1,185 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bakouan Information System</title>
+<style>
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f1f5f9;
+  color: #172554;
+}
+header {
+  background: #14532d;
+  color: white;
+  text-align: center;
+  padding: 25px 15px;
+}
+nav {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 12px;
+  background: white;
+}
+button {
+  border: 0;
+  border-radius: 7px;
+  padding: 12px 16px;
+  background: #15803d;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+}
+main {
+  max-width: 600px;
+  margin: 25px auto;
+  padding: 20px;
+}
+.panel {
+  background: white;
+  border-radius: 12px;
+  padding: 22px;
+  box-shadow: 0 3px 12px #0001;
+}
+label {
+  display: block;
+  margin-top: 15px;
+  font-weight: bold;
+}
+input, textarea {
+  width: 100%;
+  padding: 12px;
+  margin-top: 7px;
+  border: 1px solid #cbd5e1;
+  border-radius: 7px;
+  font-size: 16px;
+}
+.hidden { display: none; }
+.notice {
+  color: #92400e;
+  background: #fef3c7;
+  padding: 12px;
+  border-radius: 7px;
+}
+#status { color: #15803d; font-weight: bold; }
+footer {
+  text-align: center;
+  padding: 20px;
+  color: #64748b;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Bakouan Information System</h1>
+  <p>Bakouan Method of Education</p>
+</header>
+
+<nav>
+  <button onclick="showPage('home')">Accueil</button>
+  <button onclick="showPage('student')">Formulaire élève</button>
+  <button onclick="showPage('admin')">Administration</button>
+</nav>
+
+<main>
+  <section id="home" class="panel">
+    <h2>Bienvenue !</h2>
+    <p>
+      Bienvenue sur Bakouan Information System,
+      un projet destiné à faciliter la transmission
+      volontaire d'informations par les élèves.
+    </p>
+    <p>Choisis une rubrique dans le menu.</p>
+  </section>
+
+  <section id="student" class="panel hidden">
+    <h2>Formulaire élève</h2>
+    <p>
+      Les informations sont demandées volontairement.
+      N'indique aucune information confidentielle.
+    </p>
+
+    <form id="studentForm">
+      <label for="nom">Nom</label>
+      <input id="nom" required>
+
+      <label for="prenom">Prénom</label>
+      <input id="prenom" required>
+
+      <label for="email">E-mail (facultatif)</label>
+      <input id="email" type="email">
+      
+      <label for="mot de pass">mot de pass</label>
+      <input id="mot de pass" required>
+      
+      <label for="âge">âge</label>
+      <input id="âge" required>
+
+      <label for="pays">Pays</label>
+      <input id="pays" required>
+      
+      <label for="message">Message</label>
+      <textarea id="message" rows="4"></textarea>
+
+      <label>
+        <input type="checkbox" id="consent" required>
+        J'accepte de transmettre ces informations.
+      </label>
+
+      <button type="submit">Envoyer</button>
+    </form>
+    <p id="status" role="status"></p>
+  </section>
+
+  <section id="admin" class="panel hidden">
+    <h2>Espace administrateur</h2>
+    <div class="notice">
+      Cette partie est une démonstration.
+      Aucune réponse réelle n'est enregistrée ou affichée.
+    </div>
+
+    <p>La connexion Firebase sera ajoutée après
+      la configuration des règles sécurisées.</p>
+
+    <button onclick="showPage('home')">Retour à l'accueil</button>
+  </section>
+</main>
+
+<footer>
+  Bakouan Information System — 2026
+</footer>
+
+<script>
+function showPage(page) {
+  document.querySelectorAll("main section").forEach(section => {
+    section.classList.add("hidden");
+  });
+  document.getElementById(page).classList.remove("hidden");
+}
+
+document.getElementById("studentForm").addEventListener(
+  "submit", function(event) {
+    event.preventDefault();
+
+    if (!document.getElementById("consent").checked) {
+      return;
+    }
+
+    document.getElementById("status").textContent =
+      "Démonstration réussie. Aucune donnée n'a été enregistrée.";
+
+    this.reset();
+  }
+);
+</script>
+
+</body>
+</html>
+
