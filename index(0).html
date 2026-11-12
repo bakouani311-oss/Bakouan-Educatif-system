@@ -1,185 +1,86 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bakouan Information System</title>
 <style>
-* { box-sizing: border-box; }
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f1f5f9;
-  color: #172554;
-}
-header {
-  background: #14532d;
-  color: white;
-  text-align: center;
-  padding: 25px 15px;
-}
-nav {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 10px;
-  padding: 12px;
-  background: white;
-}
-button {
-  border: 0;
-  border-radius: 7px;
-  padding: 12px 16px;
-  background: #15803d;
-  color: white;
-  font-size: 15px;
-  cursor: pointer;
-}
-main {
-  max-width: 600px;
-  margin: 25px auto;
-  padding: 20px;
-}
-.panel {
-  background: white;
-  border-radius: 12px;
-  padding: 22px;
-  box-shadow: 0 3px 12px #0001;
-}
-label {
-  display: block;
-  margin-top: 15px;
-  font-weight: bold;
-}
-input, textarea {
-  width: 100%;
-  padding: 12px;
-  margin-top: 7px;
-  border: 1px solid #cbd5e1;
-  border-radius: 7px;
-  font-size: 16px;
-}
-.hidden { display: none; }
-.notice {
-  color: #92400e;
-  background: #fef3c7;
-  padding: 12px;
-  border-radius: 7px;
-}
-#status { color: #15803d; font-weight: bold; }
-footer {
-  text-align: center;
-  padding: 20px;
-  color: #64748b;
-}
+body{margin:0;font-family:Arial,sans-serif;background:#f1f4f9;color:#222}
+header{background:#123b70;color:white;text-align:center;padding:25px 12px}
+nav{display:flex;flex-wrap:wrap;justify-content:center;background:#09294f}
+nav button{background:none;color:white;border:0;padding:15px;cursor:pointer;font-size:15px}
+nav button:hover{background:#2463a5}
+main{max-width:850px;margin:25px auto;padding:15px}
+section{display:none;background:white;padding:25px;border-radius:10px;box-shadow:0 2px 8px #ccc}
+section.active{display:block}
+h2{color:#123b70}
+input,select,textarea{width:100%;box-sizing:border-box;padding:12px;margin:8px 0 15px;border:1px solid #bbb;border-radius:5px}
+button.submit{background:#123b70;color:white;padding:12px 20px;border:0;border-radius:5px}
+footer{text-align:center;padding:20px;color:#555}
+.notice{background:#fff3cd;padding:12px;border-radius:5px}
 </style>
 </head>
 <body>
 
 <header>
-  <h1>Bakouan Information System</h1>
-  <p>Bakouan Method of Education</p>
+<h1>BAKOUAN INFORMATION SYSTEM</h1>
+<p>La connaissance au service de la réussite</p>
 </header>
 
 <nav>
-  <button onclick="showPage('home')">Accueil</button>
-  <button onclick="showPage('student')">Formulaire élève</button>
-  <button onclick="showPage('admin')">Administration</button>
+<button onclick="showPage('accueil')">Accueil</button>
+<button onclick="showPage('formulaire')">Formulaire élève</button>
+<button onclick="showPage('administration')">Administration</button>
 </nav>
 
 <main>
-  <section id="home" class="panel">
-    <h2>Bienvenue !</h2>
-    <p>
-      Bienvenue sur Bakouan Information System,
-      un projet destiné à faciliter la transmission
-      volontaire d'informations par les élèves.
-    </p>
-    <p>Choisis une rubrique dans le menu.</p>
-  </section>
+<section id="accueil" class="active">
+<h2>Bienvenue</h2>
+<p>Bienvenue sur Bakouan Information System, une plateforme éducative destinée à accompagner les élèves dans leur parcours scolaire.</p>
+<p>Notre objectif est de faciliter l'accès à l'information et de promouvoir l'éducation pour tous.</p>
+</section>
 
-  <section id="student" class="panel hidden">
-    <h2>Formulaire élève</h2>
-    <p>
-      Les informations sont demandées volontairement.
-      N'indique aucune information confidentielle.
-    </p>
+<section id="formulaire">
+<h2>Formulaire élève</h2>
+<p>Voici un formulaire de démonstration. Il ne transmet ni n'enregistre les informations.</p>
+<form onsubmit="event.preventDefault();alert('Démonstration réussie. Aucune donnée enregistrée.');">
+<label>Nom</label>
+<input type="text" placeholder="Nom" required>
+<label>Prénom</label>
+<input type="text" placeholder="Prénom" required>
+<label>Pays</label>
+<select required>
+<option value="">Choisir un pays</option>
+<option>Côte d'Ivoire</option>
+<option>Autre pays</option>
+</select>
+<label>Message</label>
+<textarea placeholder="Ton message"></textarea>
+<button class="submit" type="submit">Envoyer (démo)</button>
+</form>
+</section>
 
-    <form id="studentForm">
-      <label for="nom">Nom</label>
-      <input id="nom" required>
-
-      <label for="prenom">Prénom</label>
-      <input id="prenom" required>
-
-      <label for="email">E-mail (facultatif)</label>
-      <input id="email" type="email">
-      
-      <label for="mot de pass">mot de pass</label>
-      <input id="mot de pass" required>
-      
-      <label for="âge">âge</label>
-      <input id="âge" required>
-
-      <label for="pays">Pays</label>
-      <input id="pays" required>
-      
-      <label for="message">Message</label>
-      <textarea id="message" rows="4"></textarea>
-
-      <label>
-        <input type="checkbox" id="consent" required>
-        J'accepte de transmettre ces informations.
-      </label>
-
-      <button type="submit">Envoyer</button>
-    </form>
-    <p id="status" role="status"></p>
-  </section>
-
-  <section id="admin" class="panel hidden">
-    <h2>Espace administrateur</h2>
-    <div class="notice">
-      Cette partie est une démonstration.
-      Aucune réponse réelle n'est enregistrée ou affichée.
-    </div>
-
-    <p>La connexion Firebase sera ajoutée après
-      la configuration des règles sécurisées.</p>
-
-    <button onclick="showPage('home')">Retour à l'accueil</button>
-  </section>
+<section id="administration">
+<h2>Administration</h2>
+<p>Bienvenue dans l'espace de présentation de l'administration.</p>
+<p class="notice">Cette rubrique est une démonstration. Elle ne donne pas accès aux données des élèves.</p>
+</section>
 </main>
 
 <footer>
-  Bakouan Information System — 2026
+<p>© 2026 Bakouan Information System</p>
 </footer>
 
 <script>
-function showPage(page) {
-  document.querySelectorAll("main section").forEach(section => {
-    section.classList.add("hidden");
-  });
-  document.getElementById(page).classList.remove("hidden");
+function showPage(page){
+document.querySelectorAll('main section').forEach(function(section){
+section.classList.remove('active');
+});
+document.getElementById(page).classList.add('active');
 }
-
-document.getElementById("studentForm").addEventListener(
-  "submit", function(event) {
-    event.preventDefault();
-
-    if (!document.getElementById("consent").checked) {
-      return;
-    }
-
-    document.getElementById("status").textContent =
-      "Démonstration réussie. Aucune donnée n'a été enregistrée.";
-
-    this.reset();
-  }
-);
 </script>
 
 </body>
 </html>
 
+      
